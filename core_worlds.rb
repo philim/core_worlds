@@ -170,13 +170,13 @@ class Ship
 		end
 		if @energy > @max_energy
 			@energy = @max_energy
-		end	
+		end
 	end
 	
 	def ai_Think(enemyship)
 	
 		if @ai_state == nil or @ai_nextthink <= 0
-			@ai_state = ["aggressive","defensive","chaotic"].choice
+			@ai_state = ["aggressive","defensive","chaotic"].sample
 			@ai_nextthink = rand(10)+5
 		end
 	
@@ -205,7 +205,7 @@ class Ship
 			end
 		else
 			if(rand(10) < 8)
-				send(["wait","shields","close","retreat","repair"].choice)
+				send(["wait","shields","close","retreat","repair"].sample)
 			else
 				attack(enemyship)
 			end
@@ -281,7 +281,7 @@ def shop_Display(ship)
 
 	begin
 	item_Number += 1
-	items[item_Number] = Subsystem.new(Subsystem.types.choice)
+	items[item_Number] = Subsystem.new(Subsystem.types.sample)
 	items[item_Number].generate_random(ship.credits)
 	
 	total_cost_so_far += items[item_Number].cost
